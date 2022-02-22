@@ -1,0 +1,65 @@
+//problem started at:14:40  paused at:  resumed at:
+#include<bits/stdc++.h>
+using namespace std;
+ 
+#define boost ios_base::sync_with_stdio(false);cin.tie(NULL)
+#define endl "\n"
+#define ll long long int
+#define mod 1000000007
+#define vll vector<ll>
+#define vvll vector<vll>
+#define pb push_back
+#define mll map<ll,ll>
+#define pll pair<ll,ll>
+ 
+int main()
+{
+	boost;
+	ll t,n,i,x,y,m,p,q,sum,ans,cnt,mx,mn,j,k;
+	// cin>>t;
+	// while(t--)
+	// {
+		sum=0;cnt=0;ans=0;mx=INT_MIN;mn=1e18;
+		cin>>n;
+		vll v;
+		x=n;
+		if(n<=3)
+		{
+			cout<<1<<endl<<0<<endl;
+			return 0;
+		}
+		while(x%2==0)
+		{
+			x/=2;
+			v.pb(2);
+		}
+		for(i=3;i*i<=n;i+=2)
+		{
+			while(x%i==0)
+			{
+				x/=i;
+				v.pb(i);
+			}
+		}
+		if(v.size()==0)
+		{
+			cout<<1<<endl;
+			cout<<0<<endl;
+		}
+		else if(v.size()==1)
+		{
+			cout<<2<<endl;
+		}
+		else if(v.size()==2)
+		{
+			if(x>1)
+				cout<<1<<endl<<v[0]*v[1]<<endl;
+			else 
+				cout<<2<<endl;
+		}
+		else 
+		{
+			cout<<1<<endl<<v[0]*v[1]<<endl;
+		}
+	// }
+}
