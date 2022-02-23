@@ -1,0 +1,121 @@
+//problem started at:  paused at:  resumed at:
+#include<bits/stdc++.h>
+using namespace std;
+ 
+#define boost ios_base::sync_with_stdio(false);cin.tie(NULL)
+#define endl "\n"
+#define ll long long int
+#define mod 1000000007
+#define vll vector<ll>
+#define vvll vector<vll>
+#define pb push_back
+#define mll map<ll,ll>
+#define pll pair<ll,ll>
+ 
+ll getscore(set<string> &st,vector<vector<string>> &v,ll n)
+{
+	ll ans=0,sum;
+	for(ll i=1;i<=2*n;i+=2)
+	{
+		sum=0;
+		for(ll j=0;j<v[i].size();j++)
+		{
+			if(!(st.count(v[i][j])))	
+				sum++;
+		}
+		for(ll j=0;j<v[i+1].size();j++)
+		{
+			if(st.count(v[i+1][j]))
+				sum++;
+		}
+		if(!sum)
+			ans++;
+	}
+	return ans;
+}
+// struct Customers{
+// 	vector<string> like;
+// 	vector<string> dislike;
+// }
+// bool comp()
+// {
+
+// }
+int main()
+{
+	boost;
+	ll t,n,i,x,y,m,p,q,sum,ans,cnt,mx,mn,j,k;
+	// cin>>t;
+	// while(t--)
+	// {
+		sum=0;cnt=0;ans=0;mx=INT_MIN;mn=1e18;
+		ifstream in("a.txt");
+		vector<string> a;
+		string s;
+		while(getline(in,s)){
+			a.pb(s);
+		}
+		ofstream out("a_output.txt");
+		n=stoi(a[0]);
+		vector<vector<string>> v(2*n+1);
+		vector<pair<vector<string>,vector<string>>> c(100005);
+		// set<ll> like,dislike;
+		// struct customer c[100005];
+		m=1;
+		set<string> st;
+		for(i=1;i<=2*n;i++)
+		{
+			x=a[i][0]-'0';
+			s="";
+			for(j=2;j<a[i].size();j++)
+			{
+				if(a[i][j]==' ')
+				{
+					if(i%2)
+						c[m].first.pb(s);
+					else 	
+						c[m].second.pb(s);
+					v[i].pb(s);
+					s="";
+				}
+				else 
+				{
+					s.pb(a[i][j]);
+				}
+			}
+			if(i%2)
+				c[m].first.pb(s);
+			else 
+			{
+				c[m].second.pb(s);
+				m++;
+			}
+			v[i].pb(s);
+		}
+		for(i=1;i<=n;i++)
+		{
+			for(auto it:c[i].first)
+				cout<<it<<' ';
+			cout<<endl;
+			for(auto it:c[i].second)
+				cout<<it<<' ';
+			cout<<endl;
+		}
+
+		// for(auto it:like)
+		// {
+		// 	if(dislike[it.first]==0)
+		// 		st.insert(it.first);
+		// 	else 
+		// 	{
+		// 		double d=(double)it.second/dislike[it.first];
+		// 		if(d>=(double)(1.832))
+		// 			st.insert(it.first);
+		// 	}
+		// }
+		// cout<<getscore(st,v,n)<<endl;
+		// out<<st.size()<<' ';
+		// for(auto it:st)
+		// 	out<<it<<' ';
+	// }
+}
