@@ -1,4 +1,3 @@
-//problem started at:  paused at:  resumed at:
 #include<bits/stdc++.h>
 using namespace std;
  
@@ -33,34 +32,25 @@ ll getscore(set<string> &st,vector<vector<string>> &v,ll n)
 	}
 	return ans;
 }
-// struct Customers{
-// 	vector<string> like;
-// 	vector<string> dislike;
-// }
-// bool comp()
-// {
-
-// }
+bool comp(pair<vector<string>,vector<string>> c1,pair<vector<string>,vector<string>> c2)
+{
+	return c1.second.size()<c2.second.size();
+}
 int main()
 {
 	boost;
 	ll t,n,i,x,y,m,p,q,sum,ans,cnt,mx,mn,j,k;
-	// cin>>t;
-	// while(t--)
-	// {
 		sum=0;cnt=0;ans=0;mx=INT_MIN;mn=1e18;
-		ifstream in("a.txt");
+		ifstream in("d.txt");
 		vector<string> a;
 		string s;
 		while(getline(in,s)){
 			a.pb(s);
 		}
-		ofstream out("a_output.txt");
+		ofstream out("d_output.txt");
 		n=stoi(a[0]);
 		vector<vector<string>> v(2*n+1);
 		vector<pair<vector<string>,vector<string>>> c(100005);
-		// set<ll> like,dislike;
-		// struct customer c[100005];
 		m=1;
 		set<string> st;
 		for(i=1;i<=2*n;i++)
@@ -87,35 +77,30 @@ int main()
 				c[m].first.pb(s);
 			else 
 			{
-				c[m].second.pb(s);
+				if(x!=0)
+					c[m].second.pb(s);
 				m++;
 			}
 			v[i].pb(s);
 		}
+		sort(c.begin()+1,c.begin()+n+1,comp);
+		set<string> pick;
 		for(i=1;i<=n;i++)
 		{
-			for(auto it:c[i].first)
-				cout<<it<<' ';
-			cout<<endl;
+			bool flag=true;
 			for(auto it:c[i].second)
-				cout<<it<<' ';
-			cout<<endl;
+			{
+				if(pick.count(it))
+					flag=false;
+			}
+			if(flag)
+			{
+				for(auto it:c[i].first)
+					pick.insert(it);
+			}
 		}
-
-		// for(auto it:like)
-		// {
-		// 	if(dislike[it.first]==0)
-		// 		st.insert(it.first);
-		// 	else 
-		// 	{
-		// 		double d=(double)it.second/dislike[it.first];
-		// 		if(d>=(double)(1.832))
-		// 			st.insert(it.first);
-		// 	}
-		// }
-		// cout<<getscore(st,v,n)<<endl;
-		// out<<st.size()<<' ';
-		// for(auto it:st)
-		// 	out<<it<<' ';
-	// }
+		cout<<getscore(pick,v,n)<<endl;
+		out<<pick.size()<<' ';
+		for(auto it:pick)
+			out<<it<<' ';
 }
