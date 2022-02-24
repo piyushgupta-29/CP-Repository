@@ -1,0 +1,49 @@
+//problem started at:  paused at:  resumed at:
+#include<bits/stdc++.h>
+using namespace std;
+ 
+#define boost ios_base::sync_with_stdio(false);cin.tie(NULL)
+#define endl "\n"
+#define ll long long int
+#define mod 1000000007
+#define vll vector<ll>
+#define vvll vector<vll>
+#define pb push_back
+#define mll map<ll,ll>
+#define pll pair<ll,ll>
+ 
+int main()
+{
+	boost;
+	ll t,n,i,x,y,m,p,q,sum,ans,cnt,mx,mn,j,k;
+	cin>>t;
+	while(t--)
+	{
+		sum=0;cnt=0;ans=0;mx=INT_MIN;mn=1e18;
+		cin>>n>>x;
+		vll a(n);
+		mll mp;
+		priority_queue<ll> pq;
+		for(i=0;i<n;i++)
+		{
+			cin>>a[i];
+			if(mp[a[i]]==0)
+				pq.push(a[i]);
+			mp[a[i]]++;
+		}
+		while(pq.size()>0)
+		{
+			k=pq.top();
+			if(mp[k])
+			{
+				if((k/x)*x==k&&mp[k/x])
+				{
+					sum+=min(mp[k/x],mp[k])*2;
+					mp[k/x]-=min(mp[k/x],mp[k]);
+				}
+			}
+			pq.pop();
+		}
+		cout<<n-sum<<endl;
+	}
+}
