@@ -1,0 +1,346 @@
+// #include<bits/stdc++.h>
+// using namespace std;
+ 
+// #define boost ios_base::sync_with_stdio(false);cin.tie(NULL)
+// #define endl "\n"
+// #define ll long long int
+// #define mod 1000000007
+// #define vll vector<ll>
+// #define vvll vector<vll>
+// #define pb push_back
+// #define mll map<ll,ll>
+// #define pll pair<ll,ll>
+
+// ifstream fin("a.txt");
+// ofstream fout("a_output.txt");
+ 
+// class Skill{
+//     public:
+//     string name;
+//     int level;
+//     Skill(string n, int l)
+//     {
+//         name=n;
+//         level=l;
+//     }
+// };
+ 
+// class Programmer{
+//     public:
+//     string name;
+
+//     vector<Skill>skills;
+//     Programmer(string n)
+//     {
+//         name=n;
+//     }
+//     int nSkills(){
+//         return skills.size();
+//     }
+// };
+ 
+// class Project{
+//     public:
+//     string name;
+//     int days;
+//     int score;
+//     int bestBefore;
+//     vector<Skill> rolls;
+ 
+//     Project(string n, int d, int s, int b)
+//     {
+//         name=n;
+//         days=d;
+//         score=s;
+//         bestBefore=b;
+//     }
+ 
+//     int nRoles()
+//     {
+//         return rolls.size();
+//     }
+ 
+// };
+// bool myComp(Project &a, Project &b)
+// {
+//     return a.nRoles()<b.nRoles();
+// }
+// vector<Programmer> allProgrammer;
+// vector<Project> allProject;
+ 
+// int main()
+// {
+//     boost;
+//  	ll t,n,i,x,y,m,p,q,sum,ans,cnt,mx,mn,j,k;
+// 	sum=0;cnt=0;ans=0;mx=INT_MIN;mn=1e18;
+//     int cont, proj;
+//     fin >> cont >> proj;
+//     string name, skillName;
+//     int nskills, level;
+    
+ 
+//     for(i=0; i<cont; i++)
+//     {
+//         fin >> name>> nskills;
+ 
+//         Programmer p(name);
+ 
+//         for(j=0; j<nskills; j++)
+//         {
+//             fin >> skillName >> level;
+//             Skill sk(skillName, level);
+//             p.skills.push_back(sk);
+//         }
+        
+//         allProgrammer.push_back(p);
+ 
+//     }
+ 
+//     int days, score, bestBefore, nrolls;
+//     string porjName;
+//     for(i=0; i<proj; i++)
+//     {
+//         fin >> name >> days >> score >> bestBefore >> nrolls;
+//         Project p(name, days, score, bestBefore);
+//         for(j=0; j<nrolls; j++)
+//         {
+//             fin >> porjName>> score;
+//             Skill s(porjName, score);
+//             p.rolls.push_back(s);
+//         }
+//         allProject.push_back(p);
+//     }
+//     sort(allProject.begin(), allProject.end(), myComp);
+//     vector<pair<string,vector<string>>> ump1;
+//     for(i=0;i<allProject.size();i++)
+//     {
+//         sum=0;
+//         for(j=0;j<allProject[i].nrolls();i++)
+//         {
+//             vector<string> xans;
+//             for(k=0;k<allProgrammer.size();k++)
+//             {
+//                 for(p=0;p<allProgrammer[k].nSkills();p++)
+//                 {
+//                     if(allProgrammer[k].skills[p].name==allProject[i].rolls[j].name)
+//                     {
+//                         if(allProgrammer[p].skills[p].level==allProject[i].rolls[j].level&&)
+//                         {
+//                             sum1++;
+//                             allProgrammer[p].skills[p].level++;
+//                             goto second;
+//                         }
+//                         else if(allProgrammer[p].skills[p].level>allProject[i].rolls[j].level)
+//                         {
+//                             sum1++;
+//                             goto second;
+//                         }
+//                     }
+//                 }
+//             }
+//             second:
+//             if(sum1)
+//             {
+//                 xans.pb(allProgrammer[k].name);
+//             }
+//         }
+//         if(xans.size()==allProject[i].nrolls())
+//         {
+//             for(j=0;j<xans.size();j++)
+//             {
+//                 ump1[allProject[i].name].pb(xans[j]);
+//             }
+//         }
+//     }
+//     cout<<ump1.size()<<endl;
+//     for(auto it:)
+ 
+//     return 0;
+// }
+#include <bits/stdc++.h>
+
+using namespace std;
+
+ifstream fin("a.txt");
+ofstream fout("a_output.txt");
+
+class Programmer{
+    public:
+    string name;
+    int notAvailableTill;
+    unordered_map<string, int>skills;
+    Programmer(string n)
+    {
+        name=n;
+        notAvailableTill=0;
+    }
+    int nSkills(){
+        return skills.size();
+    }
+};
+
+class Project{
+    public:
+    string name;
+    int days;
+    int score;
+    int bestBefore;
+    bool isDone;
+    unordered_map<string, int>rolls;
+    vector<string>skillName;
+    unordered_map<string, Programmer*>selectedProgrammer;
+
+    Project(string n, int d, int s, int b)
+    {
+        name=n;
+        days=d;
+        score=s;
+        bestBefore=b;
+        isDone=false;
+    }
+
+    int nRoles()
+    {
+        return rolls.size();
+    }
+
+};
+
+
+vector<Programmer> allProgrammer;
+vector<Project> allProject;
+vector<Project> doingProject;
+
+void createOutput()
+{
+    fout<< doingProject.size()<< "\n";
+    for(auto proj:doingProject)
+    {
+        fout << proj.name<<"\n";
+        for(auto prog:proj.skillName)
+        {
+            fout << (proj.selectedProgrammer[prog]->name)<< " ";
+        }
+        fout << "\n";
+    }
+}
+
+bool myComp(Project &a, Project &b)
+{
+    return a.nRoles()<b.nRoles();
+}
+
+void doProject(Project &p, int &day)
+{
+    day+=p.days;
+    for(auto &prog:p.selectedProgrammer)
+    {
+        prog.second->notAvailableTill=day;
+        if(prog.second->skills[prog.first]==p.rolls[prog.first])
+        {
+            prog.second->skills[prog.first]++;
+        }
+    }
+    doingProject.push_back(p);
+    createOutput();
+}
+
+
+void solve()
+{
+    // sort(allProject.begin(), allProject.end(), myComp);
+    unordered_map<string, vector<Programmer*>>svsp;
+    for(auto &prog:allProgrammer)
+    {
+        string skillName;
+        for(auto sk:prog.skills)
+        {
+            skillName=sk.first;
+            svsp[sk.first].push_back(&prog);
+        }
+    }
+    bool goon=true;
+    int day=0;
+    while (goon)
+    {
+        goon=false;
+        bool gotProj=false;
+        for(auto &proj:allProject)        
+        {
+            gotProj=true;
+            for(auto reqSkill:proj.rolls)
+            {
+                bool gotSkill=false;
+                for(auto skProg:svsp[reqSkill.first])
+                {
+                    if(skProg->skills[reqSkill.first]>=reqSkill.second && skProg->notAvailableTill<day && proj.isDone==false)
+                    {
+                        gotSkill=true;
+                        proj.selectedProgrammer[reqSkill.first]=skProg;
+                        skProg->notAvailableTill=day+proj.days;
+                        break;
+                    }
+                }
+                if(!gotSkill)
+                {
+                    gotProj=false;
+                    break;
+                }
+                
+            }
+            if(gotProj)
+            {
+                goon=true;
+                proj.isDone=true;
+                doProject(proj, day);
+            }
+            
+        }
+    }
+}
+
+int main()
+{
+
+    int cont, proj;
+    fin >> cont >> proj;
+    string name, skillName;
+    int nskills, level;
+
+    for(int i=0; i<cont; i++)
+    {
+        fin >> name>> nskills;
+
+        Programmer p(name);
+
+        for(int j=0; j<nskills; j++)
+        {
+            fin >> skillName >> level;
+            p.skills[skillName]=level;
+        }
+        
+        allProgrammer.push_back(p);
+
+    }
+
+
+    int days, score, bestBefore, nrolls;
+    for(int i=0; i<proj; i++)
+    {
+        fin >> name >> days >> score >> bestBefore >> nrolls;
+        Project p(name, days, score, bestBefore);
+        for(int j=0; j<nrolls; j++)
+        {
+            fin >> skillName>> score;
+            // Skill s(porjName, score);
+            p.skillName.push_back(skillName);
+            p.rolls[skillName]=score;
+        }
+        allProject.push_back(p);
+    }
+
+
+    solve();
+    // createOutput();
+    return 0;
+}
