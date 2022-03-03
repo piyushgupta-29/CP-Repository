@@ -1,1 +1,90 @@
+//problem started at:  paused at:  resumed at:
+#include<bits/stdc++.h>
+using namespace std;
+ 
+#define boost ios_base::sync_with_stdio(false);cin.tie(NULL)
+#define endl "\n"
+#define ll long long int
+#define mod 1000000007
+#define vll vector<ll>
+#define vvll vector<vll>
+#define pb push_back
+#define mll map<ll,ll>
+#define pll pair<ll,ll>
 
+const ll N=10001;
+ll factorialNumInverse[N + 1];
+ll naturalNumInverse[N + 1];
+ll spf[N + 1];
+ll fact[N + 1];
+
+// Function to precompute inverse of numbers
+void InverseofNumber()
+{
+    naturalNumInverse[0]=naturalNumInverse[1]=1;
+    for(ll i=2;i<=N;i++)
+    naturalNumInverse[i]=naturalNumInverse[mod%i]*(mod-mod/i)%mod;
+}
+// Function to precompute inverse of factorials
+void InverseofFactorial()
+{
+    factorialNumInverse[0]=factorialNumInverse[1]=1;
+    // precompute inverse of natural numbers
+    for(ll i=2;i<=N;i++)
+    factorialNumInverse[i]=(naturalNumInverse[i]*factorialNumInverse[i-1])%mod;
+}
+// Function to calculate factorial of 1 to N
+void factorial()
+{
+    fact[0]=1;
+    for (ll i=1;i<=N;i++) {
+        fact[i]=(fact[i-1]*i)%mod;
+    }
+}
+//power
+ll power(ll a,ll b)
+{
+    if(b==0)
+        return 1;
+    ll t=power(a,b/2)%mod;
+    ll x=((t%mod)*(t%mod))%mod;
+    if(b%2)
+        x=((x%mod)*(a%mod))%mod;
+    return x;
+}
+//inverse of a number
+ll inverse(ll x)
+{
+    return power(x,mod-2);
+}
+ll nCr(ll n,ll r)
+{
+    ll ans=((fact[n]*factorialNumInverse[r])%mod*factorialNumInverse[n-r])%mod;
+    return ans;
+}
+//nPr
+ll nPr(ll n,ll r)
+{
+    return (fact[n]*factorialNumInverse[n-r])%mod;
+}
+
+int main()
+{
+    boost;
+    ll t,n,i,x,y,m,p,q,sum,ans,cnt,mx,mn,j,k;
+    // cin>>t;
+    // while(t--)
+    // {
+        InverseofNumber();
+        InverseofFactorial();
+        factorial();
+        sum=0;cnt=0;ans=0;mx=INT_MIN;mn=1e18;
+        cin>>n>>k;
+        ll dp[5];
+        dp[1]=1;
+        dp[2]=dp[1]+(n*(n-1))/2;
+        dp[3]=dp[2]+(n*(n-1)*(n-2)*2)/6;
+        dp[4]=dp[3]+(9*n*(n-1)*(n-2)*(n-3))/24;
+        cout<<dp[k]<<endl;
+    // }
+}
