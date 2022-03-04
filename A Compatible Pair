@@ -13,7 +13,6 @@ int main()
 {
     boost;
     ll t,n,i,x,y,m,p,q,sum,ans,cnt,mx,mn,j,k;
-    // cin>>t;
     // while(t--)
     // {
         sum=0;cnt=0;ans=0;mx=-1e18;mn=1e18;
