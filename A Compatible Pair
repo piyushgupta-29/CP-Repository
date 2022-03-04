@@ -6,7 +6,6 @@ using namespace std;
 #define ll long long int
 #define mod 1000000007
 #define vll vector<ll>
-#define vvll vector<vll>
 #define pb push_back
 #define mll map<ll,ll>
 #define pll pair<ll,ll>
