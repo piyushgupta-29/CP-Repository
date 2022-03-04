@@ -57,40 +57,4 @@ int main()
                 mx=max(mx,a[i]*b[j]);
         }
         cout<<mx<<endl;
-        // if(sum==0)
-        // {
-        //     if(x==0)
-        //         cout<<a[n-2]*b[m-1]<<endl;
-        //     else
-        //         cout<<a[1]*b[m-1]<<endl;
-        // }
-        // else if(cnt==0)
-        // {
-        //     if(y==0)
-        //         cout<<a[1]*b[m-1]<<endl;
-        //     else 
-        //         cout<<a[n-2]*b[m-1]<<endl;
-        // }
-        // else 
-        // {
-        //     if(x==0)
-        //     {
-        //         cout<<a[n-2]*b[m-1]<<endl;
-        //     }
-        //     else if(y==0)
-        //     {
-        //         cout<<a[1]*b[0]<<endl;
-        //     }
-        //     else 
-        //     {
-        //         cout<<max(a[1]*b[0],a[n-2]*b[m-1])<<endl;
-        //     }
-        // }
-        // ll mx1=INT_MIN,mx2=INT_MIN;
-        // if(n>2)
-        //     cout<<max({a[1]*b[0],a[1]*b[m-1],a[n-2]*b[0],a[n-2]*b[m-1]})<<endl;
-        // else 
-        //     cout<<min(max(a[0]*b[0],a[0]*b[1]),max(a[1]*b[0],a[1]*b[1]))<<endl;
-
-    // }
 }
