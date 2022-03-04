@@ -1,1 +1,60 @@
+//problem started at:  paused at:  resumed at:
+#include<bits/stdc++.h>
+using namespace std;
+ 
+#define boost ios_base::sync_with_stdio(false);cin.tie(NULL)
+#define endl "\n"
+#define ll long long int
+#define mod 1000000007
+#define vll vector<ll>
+#define vvll vector<vll>
+#define pb push_back
+#define mll map<ll,ll>
+#define pll pair<ll,ll>
 
+int main()
+{
+    boost;
+    ll t,n,i,x,y,m,p,q,sum,ans,cnt,mx,mn,j,k;
+    // cin>>t;
+    // while(t--)
+    // {
+        sum=0;cnt=0;ans=0;mx=INT_MIN;mn=1e18;
+        cin>>n;
+        map<pll,ll> mp;
+        vector<pair<pll,ll>> a(n);
+        for(i=0;i<n;i++)
+            cin>>a[i].first.first>>a[i].first.second,a[i].second=i+1;
+        sort(a.begin(),a.end());
+        vll v(n);
+        cin>>k;
+        vector<pll> b(k);
+        for(i=0;i<k;i++)
+            cin>>b[i].first,b[i].second=i+1;
+        sort(b.begin(),b.end());
+        vector<pll> f;
+        for(j=0;j<k;j++)
+        {
+            mx=-1;
+            pair<pll,ll> p1={{b[j].first,10005},0};
+            x=upper_bound(a.begin(),a.begin()+n,p1)-a.begin();
+            for(i=0;i<x;i++)
+            {
+                if(a[i].first.second>mx&&v[i]==0)
+                {
+                    mx=a[i].first.second;
+                    q=i;
+                }
+            }
+            if(mx!=-1)
+            {
+                v[q]=1;
+                f.pb({a[q].second,b[j].second});
+                sum+=mx;
+            }
+        }
+        cout<<f.size()<<' '<<sum<<endl;
+        for(auto it:f)  
+            cout<<it.first<<' '<<it.second<<endl;
+    // }
+}
