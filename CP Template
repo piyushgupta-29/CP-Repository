@@ -242,3 +242,5 @@ int main()
     boost;
     ll t,n,i,x,y,m,p,q,sum,ans,cnt,mx,mn,j,k;
     cin>>t;
+    while(t--)
+    {
