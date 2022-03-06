@@ -237,3 +237,8 @@ ll query(vll &seg,ll s,ll e,ll tidx,ll left,ll right)
     ll a2=query(seg,mid+1,e,2*tidx+1,left,right);
     return a1+a2;
 }
+int main()
+{
+    boost;
+    ll t,n,i,x,y,m,p,q,sum,ans,cnt,mx,mn,j,k;
+    cin>>t;
