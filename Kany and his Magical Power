@@ -1,0 +1,59 @@
+//problem started at:  paused at:  resumed at:
+#include<bits/stdc++.h>
+using namespace std;
+ 
+#define boost ios_base::sync_with_stdio(false);cin.tie(NULL)
+#define endl "\n"
+#define ll long long int
+#define mod 1000000007
+#define vll vector<ll>
+#define vvll vector<vll>
+#define pb push_back
+#define mll map<ll,ll>
+#define pll pair<ll,ll>
+ 
+int main()
+{
+    boost;
+    ll t,n,i,x,y,m,p,q,sum,ans,cnt,mx,mn,j,k;
+    // cin>>t;
+    // while(t--)
+    // {
+        sum=0;cnt=0;ans=0;mx=INT_MIN;mn=1e18;
+        cin>>n>>k;
+        vll a(n);
+        mll mp;
+        vll pre(n,0);
+        for(i=0;i<n;i++)
+        {
+            cin>>a[i];
+            if(i)
+                pre[i]=pre[i-1]+a[i];
+            mp[a[i]]++;
+        }
+        sort(a.begin(),a.end());
+        for(i=1;i<n;i++)
+        {
+            ll l=0,r=i-1;
+            while(r>=l)
+            {
+                ll mid=(l+r)/2;
+                if((r-mid+1)*a[i]-(pre[r]-(mid==0?0:pre[mid-1]))>k)
+                {
+                    l=mid+1;
+                }
+                else 
+                {
+                    sum=r;
+                    r=mid-1;
+                }
+            }
+            if(sum+1>mx)
+            {
+                mx=sum+1;
+                ans=a[i];
+            }
+        }
+        cout<<ans<<endl;
+    // }
+}
