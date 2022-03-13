@@ -23,7 +23,6 @@ int main()
             k=sqrt(x);
             if(k*k==x)
             {
-                cout<<x<<' ';
                 sum++;
             }
         }
