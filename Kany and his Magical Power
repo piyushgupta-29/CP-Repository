@@ -11,7 +11,7 @@ using namespace std;
 int main()
 {
     boost;
-    ll t,n,i,x,y,m,p,sum,ans,cnt,mx,j,k;
+    ll t,n,i,x,y,m,sum,ans,cnt,mx,j,k;
     sum=0;cnt=0;ans=0;mx=INT_MIN;
     cin>>n>>k;
     vll a(n);
