@@ -4,7 +4,6 @@ using namespace std;
 #define boost ios_base::sync_with_stdio(false);cin.tie(NULL)
 #define endl "\n"
 #define ll long long int
-#define vll vector<ll>
 #define pb push_back
 
 int main()
