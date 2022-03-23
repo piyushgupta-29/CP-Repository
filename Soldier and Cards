@@ -60,5 +60,4 @@ int main()
             else    
                 cout<<j<<' '<<1<<endl;
         }
-    // }
 }
