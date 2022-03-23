@@ -8,7 +8,6 @@ using namespace std;
 #define vvll vector<vll>
 #define pb push_back
 #define mll map<ll,ll>
-#define pll pair<ll,ll>
 
 int main()
 {
