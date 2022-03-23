@@ -14,7 +14,6 @@ int main()
 {
     boost;
     ll t,n,i,x,y,m,p,q,sum,ans,cnt,mx,mn,j,k;
-    // cin>>t;
         sum=0;cnt=0;ans=0;mx=INT_MIN;mn=1e18;
         cin>>n;
         cin>>k;
