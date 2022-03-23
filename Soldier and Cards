@@ -12,49 +12,49 @@ int main()
 {
     boost;
     ll t,n,i,x,y,m,p,q,sum,ans,cnt,mx,mn,j,k;
-        sum=0;cnt=0;ans=0;mx=INT_MIN;mn=1e18;
-        cin>>n;
-        cin>>k;
-        queue<ll> q1,q2;
-        for(i=0;i<k;i++)
+    sum=0;cnt=0;ans=0;mx=INT_MIN;mn=1e18;
+    cin>>n;
+    cin>>k;
+    queue<ll> q1,q2;
+    for(i=0;i<k;i++)
+    {
+        cin>>x;
+        q1.push(x);
+    }
+    cin>>k;
+    for(i=0;i<k;i++)
+    {
+        cin>>x;
+        q2.push(x);
+    }
+    j=0;
+    while(j<100000)
+    {
+        if(q1.size()==0||q2.size()==0)
+            break;
+        if(q1.front()>q2.front())
         {
-            cin>>x;
-            q1.push(x);
+            q1.push(q2.front());
+            q1.push(q1.front());
+            q1.pop();
+            q2.pop();
         }
-        cin>>k;
-        for(i=0;i<k;i++)
+        else if(q2.front()>q1.front())
         {
-            cin>>x;
-            q2.push(x);
+            q2.push(q1.front());
+            q2.push(q2.front());
+            q2.pop();
+            q1.pop();
         }
-        j=0;
-        while(j<100000)
-        {
-            if(q1.size()==0||q2.size()==0)
-                break;
-            if(q1.front()>q2.front())
-            {
-                q1.push(q2.front());
-                q1.push(q1.front());
-                q1.pop();
-                q2.pop();
-            }
-            else if(q2.front()>q1.front())
-            {
-                q2.push(q1.front());
-                q2.push(q2.front());
-                q2.pop();
-                q1.pop();
-            }
-            j++;
-        }
-        if(j>=100000)
-            cout<<-1<<endl;
-        else
-        {
-            if(q1.size()==0)
-                cout<<j<<' '<<2<<endl;
-            else    
-                cout<<j<<' '<<1<<endl;
-        }
+        j++;
+    }
+    if(j>=100000)
+        cout<<-1<<endl;
+    else
+    {
+        if(q1.size()==0)
+            cout<<j<<' '<<2<<endl;
+        else    
+            cout<<j<<' '<<1<<endl;
+    }
 }
