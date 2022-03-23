@@ -30,7 +30,6 @@ int main()
         j=0;
         while(j<100000)
         {
-            // cout<<q1.front()<<' '<<q2.front()<<endl;
             if(q1.size()==0||q2.size()==0)
                 break;
             if(q1.front()>q2.front())
