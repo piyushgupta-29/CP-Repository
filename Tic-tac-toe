@@ -1,0 +1,85 @@
+//problem started at:  paused at:  resumed at:
+#include<bits/stdc++.h>
+using namespace std;
+ 
+#define boost ios_base::sync_with_stdio(false);cin.tie(NULL)
+#define endl "\n"
+#define ll long long int
+#define mod 1000000007
+#define vll vector<ll>
+#define pb push_back
+#define mll map<ll,ll>
+#define pll pair<ll,ll>
+ 
+int main()
+{
+	boost;
+	ll t,n,i,x,y,m,p,q,sum,ans,cnt,mx,mn,j,k;
+	// cin>>t;
+	// while(t--)
+	// {
+		sum=0;cnt=0;ans=0;mx=INT_MIN;mn=1e18;
+		char a[3][3];
+		for(i=0;i<3;i++)
+		{
+			for(j=0;j<3;j++)
+			{
+				cin>>a[i][j];
+				if(a[i][j]=='X')
+					sum++;
+				else if(a[i][j]=='0')
+					cnt++;
+			}
+		}
+		map<char,int> mp;
+		if(a[0][0]==a[0][1]&&a[0][1]==a[0][2]&&a[0][1]!='.')
+			mp[a[0][1]]++;
+		if(a[1][0]==a[1][1]&&a[1][1]==a[1][2]&&a[1][1]!='.')
+			mp[a[1][1]]++;
+		if(a[2][0]==a[2][1]&&a[2][1]==a[2][2]&&a[2][1]!='.')
+			mp[a[2][1]]++;
+		if(a[0][0]==a[1][0]&&a[1][0]==a[2][0]&&a[1][0]!='.')
+			mp[a[1][0]]++;
+		if(a[0][1]==a[1][1]&&a[1][1]==a[2][1]&&a[2][1]!='.')
+			mp[a[0][1]]++;
+		if(a[0][2]==a[1][2]&&a[1][2]==a[2][2]&&a[1][2]!='.')
+			mp[a[1][2]]++;
+		if(a[0][0]==a[1][1]&&a[1][1]==a[2][2]&&a[1][1]!='.')	
+			mp[a[1][1]]++;
+		if(a[0][2]==a[1][1]&&a[1][1]==a[2][0]&&a[1][1]!='.')
+			mp[a[1][1]]++;
+		if(mp['X']>2||mp['0']>1||cnt>sum||sum-cnt>1)
+		{	
+			cout<<"illegal"<<endl;
+			return 0;
+		}
+		if(mp['X']==2)
+		{
+			cout<<"the first player won"<<endl;
+			return 0;
+		}
+		if(mp['X']+mp['0'])
+		{
+			if(mp['X']&&sum==cnt)
+				cout<<"illegal"<<endl;
+			else if(mp['X'])
+				cout<<"the first player won"<<endl;
+			else if(mp['0']&&sum>cnt)
+				cout<<"illegal"<<endl;
+			else 
+				cout<<"the second player won"<<endl;
+			return 0;
+		}
+		if(sum+cnt==9)
+		{
+			cout<<"draw"<<endl;
+		}
+		else 
+		{
+			if(sum==cnt)
+				cout<<"first"<<endl;
+			else	
+				cout<<"second"<<endl;
+		}
+	// }
+}
