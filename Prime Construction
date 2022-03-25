@@ -1,0 +1,74 @@
+//problem started at:  paused at:  resumed at:
+#include<bits/stdc++.h>
+using namespace std;
+ 
+#define boost ios_base::sync_with_stdio(false);cin.tie(NULL)
+#define endl "\n"
+#define ll long long int
+#define mod 1000000007
+#define vll vector<ll>
+#define vvll vector<vll>
+#define pb push_back
+#define mll map<ll,ll>
+#define pll pair<ll,ll>
+ 
+ll gcd(ll a, ll b)
+{
+    if (b == 0)
+        return a;
+    return gcd(b, a % b);
+}
+ll findlcm(vll &arr, ll n)
+{
+    ll ans = arr[0];
+    for (ll i = 1; i < n; i++)
+        ans = (((arr[i] * ans)) /
+                (gcd(arr[i], ans)));
+ 
+    return ans;
+}
+int main()
+{
+    boost;
+    ll t,n,i,x,y,m,p,q,sum,ans,cnt,mx,mn,j,k;
+    // cin>>t;
+    // while(t--)
+    // {
+        sum=0;
+        set<ll> s;
+        vll a;
+        string line;
+        getline(cin, line);
+        istringstream iss(line);
+        ll tmp;
+        while (iss >> tmp) {
+            s.insert(tmp);
+            iss.ignore(1, ',');
+        }
+        mn=*(s.begin());
+        s.erase(mn);
+        for(auto it:s)
+            a.pb(it);
+        k=findlcm(a,a.size());
+        if((k%2==0&&mn%2==0)||(k%mn==0))
+        {
+            cout<<"None"<<endl;
+            return 0;
+        }
+        if(mn%2==k%2)
+            k*=2;
+        k+=mn;
+        for(ll i=2;i*i<=k;i++)
+        {
+            if(k%i==0)
+            {
+                sum++;
+                break;
+            }
+        }
+        if(sum)
+            cout<<"None"<<endl;
+        else 
+            cout<<k<<endl;
+    // }
+}
