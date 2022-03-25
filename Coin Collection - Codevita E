@@ -81,20 +81,12 @@ int main()
         set<ll> st;
         for(i=1;i<=sum;i++)
         {   
-            // cout<<parent[i]<<' ';
             st.insert(parent[i]);
         }
-        // cout<<endl;
-        // for(i=1;i<=sum;i++)
-        // {
-        //     cout<<size[i]<<' ';
-        // }
-        // cout<<endl;
         x=st.size();
         for(i=1;i<=x;i+=2)
             cnt+=size[i];
         for(i=2;i<=x;i+=2)  
             ans+=size[i];
         cout<<cnt<<' '<<ans;
-    // }
 }
