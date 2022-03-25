@@ -12,69 +12,225 @@ using namespace std;
 #define mll map<ll,ll>
 #define pll pair<ll,ll>
  
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+#define ordered_set tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_update>
+const ll N=1000001;
+ll factorialNumInverse[N + 1];
+ll naturalNumInverse[N + 1];
+ll spf[N + 1];
+ll fact[N + 1];
+bool prime[N+1];
+
+void SieveOfEratosthenes(ll n)
+{
+    memset(prime, true, sizeof(prime));
+    for (ll p = 2; p * p <= n; p++)
+    {
+        if (prime[p] == true)
+        {
+            for (ll i = p * p; i <= n; i += p)
+                prime[i] = false;
+        }
+    }
+}
+//Prime factorization
+void sieve()
+{
+    spf[1] = 1;
+    for (ll i=2; i<N; i++)
+        spf[i] = i;
+    for (ll i=4; i<N; i+=2)
+        spf[i] = 2;
+    for (ll i=3; i*i<N; i++)
+    {
+        if (spf[i] == i)
+        {
+            for (ll j=i*i; j<N; j+=i)
+                if (spf[j]==j)
+                    spf[j] = i;
+        }
+    }
+}
+
 struct Date {
     ll d, m, y;
 };
  
-const int monthDays[12]
+const ll monthDays[12]
     = { 31, 28, 31, 30, 31, 30,
        31, 31, 30, 31, 30, 31 };
  
-int countLeapYears(Date d)
+ll countLeapYears(Date d)
 {
-    int years = d.y;
+    ll years = d.y;
  
     if (d.m <= 2)
         years--;
  
-    return years / 4
-           - years / 100
-           + years / 400;
+    return years / 4 - years / 100 + years / 400;
 }
  
-int getDifference(Date dt1, Date dt2)
+ll getDifference(Date dt1, Date dt2)
 {
-    long int n1 = dt1.y * 365 + dt1.d;
+    ll n1 = dt1.y * 365 + dt1.d;
  
-    for (int i = 0; i < dt1.m - 1; i++)
+    for (ll i = 0; i < dt1.m - 1; i++)
         n1 += monthDays[i];
     n1 += countLeapYears(dt1);
  
-    long int n2 = dt2.y * 365 + dt2.d;
-    for (int i = 0; i < dt2.m - 1; i++)
+    ll n2 = dt2.y * 365 + dt2.d;
+    for (ll i = 0; i < dt2.m - 1; i++)
         n2 += monthDays[i];
     n2 += countLeapYears(dt2);
  
     return (n2 - n1);
 }
 
+bool isLeap(ll y)
+{
+    if (y%100 != 0 && y%4 == 0 || y %400 == 0)
+        return true;
+ 
+    return false;
+}
+ 
+// Given a date, returns number of days elapsed
+// from the  beginning of the current year (1st
+// jan).
+ll offsetDays(ll d, ll m, ll y)
+{
+    ll offset = d;
+ 
+    switch (m - 1)
+    {
+    case 11:
+        offset += 30;
+    case 10:
+        offset += 31;
+    case 9:
+        offset += 30;
+    case 8:
+        offset += 31;
+    case 7:
+        offset += 31;
+    case 6:
+        offset += 30;
+    case 5:
+        offset += 31;
+    case 4:
+        offset += 30;
+    case 3:
+        offset += 31;
+    case 2:
+        offset += 28;
+    case 1:
+        offset += 31;
+    }
+ 
+    if (isLeap(y) && m > 2)
+        offset += 1;
+ 
+    return offset;
+}
+ 
+// Given a year and days elapsed in it, finds
+// date by storing results in d and m.
+void revoffsetDays(ll offset, ll y, ll *d, ll *m)
+{
+    ll month[13] = { 0, 31, 28, 31, 30, 31, 30,
+                      31, 31, 30, 31, 30, 31 };
+ 
+    if (isLeap(y))
+        month[2] = 29;
+ 
+    ll i;
+    for (i = 1; i <= 12; i++)
+    {
+        if (offset <= month[i])
+            break;
+        offset = offset - month[i];
+    }
+ 
+    *d = offset;
+    *m = i;
+}
+ 
+ll addDays(ll d1, ll m1, ll y1, ll x)
+{
+    ll offset1 = offsetDays(d1, m1, y1);
+    ll remDays = isLeap(y1)?(366-offset1):(365-offset1);
+ 
+    ll y2, offset2;
+    if (x <= remDays)
+    {
+        y2 = y1;
+        offset2 = offset1 + x;
+    }
+    else
+    {
+        x -= remDays;
+        y2 = y1 + 1;
+        ll y2days = isLeap(y2)?366:365;
+        while (x >= y2days)
+        {
+            x -= y2days;
+            y2++;
+            y2days = isLeap(y2)?366:365;
+        }
+        offset2 = x;
+    }
+    ll m2, d2;
+    revoffsetDays(offset2, y2, &d2, &m2);
+    return m2;
+}
 int main()
 {
     boost;
     ll t,n,i,x,y,m,p,q,sum,ans,cnt,mx,mn,j,k;
-    // cin>>t;
-    // while(t--)
-    // {
-        sum=0;cnt=0;ans=0;mx=INT_MIN;mn=1e18;
-    //     Date dt1 = { 1, 2, 2000 };
-    // Date dt2 = { 1, 2, 2004 };
- 
-    // // Function call
-    // cout << "Difference between two dates is "
-    //      << getDifference(dt1, dt2);
-        Date date1={1,1,2022};
-        string s;
-        cin>>s;
-        ll d1,m1,y1;
-        y1=stoi(s.substr(0,4));
-        m1=stoi(s.substr(4,2));
-        d1=stoi(s.substr(6,2));
-        Date date2{d1,m1,y1};
-        k=(abs(getDifference(date1, date2)))%7;
-        vector<string> day{"Mon","Tue","Wed","Thu","Fri","Sat","Sun"};
-        j=5;
-        cin>>s;
-        cin>>n;
-        
-    // }
+    sum=0;cnt=0;ans=0;mx=INT_MIN;mn=1e18;
+    sieve();
+    SieveOfEratosthenes(100000);
+    Date date1={3,1,2022};
+    string s;
+    cin>>s;
+    ll d1,m1,y1;
+    y1=stoi(s.substr(0,4));
+    m1=stoi(s.substr(4,2));
+    d1=stoi(s.substr(6,2));
+    Date date2{d1,m1,y1};
+    k=(abs(getDifference(date1, date2)));
+    cout<<k<<endl;
+    map<string,int> mp;
+    mp["Mon"]=1;
+    mp["Tue"]=2;
+    mp["Wed"]=3;
+    mp["Thu"]=4;
+    mp["Fri"]=5;
+    mp["Sat"]=6;
+    mp["Sun"]=7;
+    cin>>s;
+    cout<<mp[s]<<endl;
+    j=mp[s]-k;
+    cin>>n;
+    ans=-1;
+    for(i=j;i<=10000;i+=7)
+    {
+        if(prime[i])
+        {
+            x=addDays(d1,m1,y1,i);
+            if(prime[x])
+            {
+                ans=i;
+                break;
+            }
+        }
+    }
+    if(ans==-1)
+        cout<<"No 0";
+    else if(ans<=n)
+        cout<<"Yes "<<ans;
+    else 
+        cout<<"No "<<ans;
 }
