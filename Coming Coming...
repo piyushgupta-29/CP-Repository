@@ -15,19 +15,19 @@ int main()
 {
     boost;
     ll t,n,i,x,y,m,p,q,sum,ans,cnt,mx,mn,j,k;
-        sum=0;cnt=0;ans=0;mx=INT_MIN;mn=1e18;
-        cin>>n>>m>>x;
-        vvll a(n+1);
-        for(i=0;i<m;i++)
-        {
-            ll u,v;
-            cin>>u>>v;
-            a[u].pb(v);
-            a[v].pb(u);
-        }
-        for(i=0;i<x;i++)
-        {
-            cin>>k;
-            cout<<a[k].size()+1<<' ';
-        }
+    sum=0;cnt=0;ans=0;mx=INT_MIN;mn=1e18;
+    cin>>n>>m>>x;
+    vvll a(n+1);
+    for(i=0;i<m;i++)
+    {
+        ll u,v;
+        cin>>u>>v;
+        a[u].pb(v);
+        a[v].pb(u);
+    }
+    for(i=0;i<x;i++)
+    {
+        cin>>k;
+        cout<<a[k].size()+1<<' ';
+    }
 }
