@@ -30,5 +30,4 @@ int main()
             cin>>k;
             cout<<a[k].size()+1<<' ';
         }
-    // }
 }
