@@ -6,8 +6,8 @@ using namespace std;
 #define ll long long int
 #define vll vector<ll>
 #define pb push_back
- aaaaaa
-int main()a
+
+int main()
 {
 	boost;
 	ll t,n,i,x,y,m,sum,ans,cnt,mx,mn,j,k;
