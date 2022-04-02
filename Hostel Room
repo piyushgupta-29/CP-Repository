@@ -7,7 +7,7 @@ using namespace std;
 #define vll vector<ll>
 #define pb push_back
  aa
-int main()
+int main()a
 {
 	boost;
 	ll t,n,i,x,y,m,sum,ans,cnt,mx,mn,j,k;
