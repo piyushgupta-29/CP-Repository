@@ -8,8 +8,8 @@ using namespace std;
 #define vll vector<ll>
 #define pb push_back
 #define mll map<ll,ll>
-#define pll pair<ll,ll>
-aaaaaaa
+#define pll pair<ll,all>
+aaaaaaaa
 int main()
 {
     boost;
