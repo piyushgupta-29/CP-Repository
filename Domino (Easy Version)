@@ -1,0 +1,48 @@
+//problem started at:16:15  paused at:  resumed at:
+// __builtin_popcoutnll(); *max_element(a,a+n);
+#include<bits/stdc++.h>
+using namespace std;
+ 
+#define boost ios_base::sync_with_stdio(false);cin.tie(NULL)
+#define endl "\n"
+#define ll long long int
+#define mod 1000000007  
+#define vll vector<ll>
+
+int main()
+{
+    boost;
+    ll t,n,i,x,y,m,p,q,sum,ans,cnt,mx,mn,j,k;
+    cin>>t;
+    while(t--)
+    {
+        sum=0;cnt=0;ans=0;mx=INT_MIN;mn=INT_MAX;
+        cin>>n>>m>>k;
+        if(n%2==0&&m%2==0)
+        {
+            if(k%2==0)
+                cout<<"YES"<<endl;
+            else 
+                cout<<"NO"<<endl;
+        }
+        else if(n%2==0&&m%2)
+        {
+            if(k%2==0)  
+            {
+                if(k<=((n*m)/2)-n/2)
+                    cout<<"YES"<<endl;
+                else 
+                    cout<<"NO"<<endl;
+            }
+            else
+                cout<<"NO"<<endl;
+        }
+        else 
+        {
+            if(k-(m/2)>=0&&(k-(m/2))%2==0)
+                cout<<"YES"<<endl;
+            else 
+                cout<<"NO"<<endl;
+        }
+    }
+}
