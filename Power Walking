@@ -16,7 +16,6 @@ int main()
 	cin>>t;
 	while(t--)
 	{
-		sum=0;
 		cin>>n;
 		vll a(n);
 		mll mp;
