@@ -17,7 +17,7 @@ int main()
 	cin>>t;
 	while(t--)
 	{
-		sum=0;cnt=0;ans=0;mx=INT_MIN;mn=1e18;
+		sum=0;cnt=0;ans=0;mx=INT_MIN;
 		cin>>n;
 		vll a(n);
 		mll mp;
