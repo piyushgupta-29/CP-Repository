@@ -1,0 +1,81 @@
+//problem started at:  paused at:  resumed at:
+#include<bits/stdc++.h>
+using namespace std;
+ 
+#define boost ios_base::sync_with_stdio(false);cin.tie(NULL)
+#define endl "\n"
+#define ll long long int
+#define mod 1000000007
+#define vll vector<ll>
+#define vvll vector<vll>
+#define pb push_back
+#define mll map<ll,ll>
+#define pll pair<ll,ll>
+ 
+int main()
+{
+    boost;
+    ll t,n,i,x,y,m,p,q,sum,ans,cnt,mx,mn,j,k;
+    cin>>t;
+    while(t--)
+    {
+        sum=0;cnt=0;ans=0;mx=INT_MIN;mn=1e18;
+        cin>>n;
+        vll a(2*n);
+        for(i=0;i<2*n;i++)
+            cin>>a[i];
+        if(n==1)
+        {
+            cout<<"YES"<<endl;
+            cout<<a[0]+a[1]<<endl;
+            cout<<a[0]<<' '<<a[1]<<endl;
+            continue;
+        }
+        sort(a.rbegin(),a.rend());
+        for(i=1;i<2*n;i++)
+        {
+            vector<pair<ll,ll>> v;
+            v.pb({a[0],a[i]});
+            mll mp;
+            for(j=1;j<2*n;j++)
+            {
+                if(j==i)
+                    continue;
+                mp[a[j]]++;
+            }
+            auto it=mp.rbegin();
+            p=it->first;
+            k=a[0]-p;
+            while(mp[k]>(p==k?1:0))
+            {
+                v.pb({p,k});
+                mp[p]--;
+                mp[k]--;
+                if(mp[k]==0)
+                    mp.erase(k);
+                if(mp[p]==0)
+                    mp.erase(p);
+                x=p;
+                if(mp.size()>0)
+                {
+                    it=mp.rbegin();
+                    p=it->first;
+                    k=x-p;
+                }
+            }
+            if(v.size()==n)
+            {
+                cout<<"YES"<<endl;
+                cout<<a[0]+a[i]<<endl;
+                sum++;
+                for(auto it:v)
+                {
+                    cout<<it.first<<' '<<it.second<<endl;
+                }
+                break;
+            }
+        }
+        if(!sum)
+            cout<<"NO"<<endl;
+    }
+}
