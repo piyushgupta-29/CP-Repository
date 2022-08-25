@@ -49,13 +49,11 @@ int main()
         for(i=1;i<=n;i++)
         {
             if(vis[i]) continue;
-            // cout<<i<<endl;
             sum=1;cnt=0;col[i]=1;
             dfs(i,-1);
             if(flag) break; 
-            ans+=max(cnt,sum);
+            ans+=min(cnt,sum);
         }
-        // for(i=1;i<=n;i++) cout<<col[i]<<' ';cout<<endl;
         if(flag) cout<<-1<<endl; 
         else cout<<n-ans<<endl;
     }
