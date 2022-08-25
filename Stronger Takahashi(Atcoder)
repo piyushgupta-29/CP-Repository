@@ -1,0 +1,57 @@
+//problem started at:  paused at:  resumed at:
+#include<bits/stdc++.h>
+using namespace std;
+ 
+#define boost ios_base::sync_with_stdio(false);cin.tie(NULL)
+#define endl "\n"
+#define ll long long int
+#define mod 1000000007
+#define vll vector<ll>
+#define vvll vector<vll>
+#define pb push_back
+#define mll map<ll,ll>
+#define pll pair<ll,ll>
+#define N 505
+
+vector<vector<char>> a(N,vector<char>(N));
+vvll dp(N,vll(N));
+vector<pll> change={ {-1,0},{1,0},{0,-1},{0,1},{-2,0},{2,0},{0,-2},{0,2},
+{1,1},{1,-1},{-1,1},{-1,-1},{1,2},{1,-2},{-1,2},{-1,-2},{2,1},{2,-1},{-2,1},{-2,-1} };
+
+int main()
+{
+    boost;
+    ll t,n,i,x,y,j,k,m,mn,mx,cnt,sum,ans;
+    sum=0;cnt=0;ans=0;mn=1e18;mx=INT_MIN;
+    cin>>n>>m;
+    for(i=1;i<=n;i++)
+        for(j=1;j<=m;j++) 
+            cin>>a[i][j],dp[i][j]=mod;
+    queue<pll> q;
+    q.push({1,1});
+    dp[1][1]=0;
+    while(!q.empty())
+    {
+        pll p=q.front();
+        q.pop();
+        for(auto it:change)
+        {
+            i=it.first+p.first;
+            j=it.second+p.second;
+            if(i<1||i>n||j<1||j>m) continue;
+            if(abs(it.first)+abs(it.second)>1)
+            {
+                if(dp[i][j]>dp[p.first][p.second]+1)
+                    q.push({i,j}),dp[i][j]=dp[p.first][p.second]+1;
+            }
+            else 
+            {
+                if(a[i][j]=='.'&&dp[i][j]>dp[p.first][p.second])
+                    q.push({i,j}),dp[i][j]=dp[p.first][p.second];
+                else if(a[i][j]=='#'&&dp[i][j]>dp[p.first][p.second]+1)
+                    q.push({i,j}),dp[i][j]=dp[p.first][p.second]+1;
+            }
+        }
+    }
+    cout<<dp[n][m];
+}
