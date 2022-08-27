@@ -1,0 +1,73 @@
+//Question: Given a n*n matrix of characters, find the maximum length of forest.A forest consists of number of trees connected in that forest.
+//Two trees are said to be connected if they share a side.A tree is denoted by 'T'.
+//Constraints: N<=1000
+
+//Sample Test Case:
+//5
+//TTTWW
+//TWWTT
+//TWWTT
+//TWTTT
+//WWTTT
+//Output: 10
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define ll long long int
+#define vll vector<ll>
+#define vvll vector<vll>
+#define mll map<ll,ll>
+#define pll pair<ll,ll>
+
+pll getparent(pll a,vector<vector<pll>> &par)
+{
+    return par[a.first][a.second]=(par[a.first][a.second]==a?a:par[a.first][a.second]);
+}
+bool getunion(pll a,pll b,vector<vector<pll>> &par,vvll &size)
+{
+    a=getparent(a,par);
+    b=getparent(b,par); 
+    if(a==b) { return false; }
+    if(size[b.first][b.second]>size[a.first][a.second])
+    {
+        par[a.first][a.second]=b;
+        size[b.first][b.second]+=size[a.first][a.second];
+    }
+    else 
+    {
+        par[b.first][b.second]=a;
+        size[a.first][a.second]+=size[b.first][b.second];
+    }
+    return true;
+}
+int main()
+{
+    ll t,n,i,x,j,k,mn,mx=0,p,q,sum,cnt,ans;
+    cin>>n;
+    vvll dp(n+5,vll(n+5,0)),size(n+5,vll(n+5,1));
+    vector<vector<pll>> par(n+5,vector<pll>(n+5));
+    vector<vector<char>> s(n+5,vector<char>(n+5));
+    for(i=1;i<=n;i++)
+        for(j=1;j<=n;j++)
+            cin>>s[i][j],par[i][j]={i,j};
+    
+    for(i=1;i<=n;i++)
+    {
+        for(j=1;j<=n;j++)
+        {
+            if(s[i][j]=='W') { size[i][j]=0; continue; }
+            pll p1={i-1,j},p2={i,j-1},p3={i,j};
+            if(s[i-1][j]=='T') 
+                getunion(p1,p3,par,size);
+            if(s[i][j-1]=='T')
+                getunion(p2,p3,par,size);
+        }
+    }
+    for(i=1;i<=n;i++)
+    {
+        for(j=1;j<=n;j++)
+            mx=max(mx,size[i][j]);
+    }
+    cout<<mx;
+}
