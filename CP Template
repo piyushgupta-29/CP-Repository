@@ -30,7 +30,8 @@ ll fact[N + 1];
 //6.Disjoint set union
 //7.Binary to decimal
 //8.Decimal to binary
-//9.Segment Tree
+//9.Trie
+//10.Segment Tree
 //z array
 vector<ll> z_function(string s) {
     ll n = (ll) s.length();
