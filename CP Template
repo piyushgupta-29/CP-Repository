@@ -19,7 +19,7 @@ using namespace __gnu_pbds;
 const ll N=1000001;
 ll factorialNumInverse[N + 1];
 ll naturalNumInverse[N + 1];
-ll spf[N + 1];
+vector<ll> spf(N + 1, 1);
 ll fact[N + 1];
 
 //1.Z function
@@ -77,18 +77,18 @@ vector<ll> SieveOfEratosthenes(ll n)
 //Prime factorization
 void sieve()
 {
-    spf[1] = 1;
-    for (ll i=2; i<N; i++)
-        spf[i] = i;
-    for (ll i=4; i<N; i+=2)
-        spf[i] = 2;
-    for (ll i=3; i*i<N; i++)
-    {
-        if (spf[i] == i)
-        {
-            for (ll j=i*i; j<N; j+=i)
-                if (spf[j]==j)
+    // stores smallest prime factor for every number
+    spf[0] = 0;
+    for (int i = 2; i <= N; i++) {
+        if (spf[i] == 1) { // if the number is prime ,mark
+                           // all its multiples who havent
+                           // gotten their spf yet
+            for (int j = i; j <= N; j += i) {
+                if (spf[j]== 1) // if its smallest prime factor is
+                          // 1 means its spf hasnt been
+                          // found yet so change it to i
                     spf[j] = i;
+            }
         }
     }
 }
