@@ -199,11 +199,23 @@ string dectobin(ll n)
     return s;
 }
 
+// Trie
+// Like AVL trees but mainly used with problems involving words and strings
+// will store ["app", "apple", "all", "abc"] like below 
+//     root of Trie (pointer to a)
+//          |
+//          a
+//        /   \
+//       p     b
+//      / \     \
+//     l   p     c
+//    /
+//   e
 Class Trie 
 {
     public:
     vector<Trie* > children;
-    bool eow;
+    bool isLeaf;  // Represents end of word, e.g for "apple" eow will be true for letter 'e'
 };
 void insert(Trie* root, string& key) {
     // Initialize the curr pointer with the root node
