@@ -246,6 +246,51 @@ int main()
     while(t--)
     {
         sum=0;cnt=0;ans=0;mx=INT_MIN;mn=1e18;
+
+        // String 
+        // string text = "C++ Programming";
+        // append() or '+' - Used to append a string to another string, e.g str1.append(str2);
+        // substr(starting index of substring, length of substring); 
+        // compare() or '==' - To compare two strings 
+        // int position = text.find("Programming"); // Find the position of a substring, return 4 in this case
+
+        // Vector
+        // vector<char> v = {'a', 'f', 'd'};
+        // Inserting int 'c' at index 1
+        // v.insert(v.begin() + 1, 'c'); 
+
+        // Deleting element 'f'
+        // v.erase(find(v.begin(), v.end(), 'f')); erase() takes an iterator and not index
+
+        // rbegin() - Returns a reverse iterator pointing to the last element of the vector.
+        // rend() - Returns a reverse iterator pointing to the element preceding the first element of the vector.
+
+        // Search an element 6
+        // auto it = find(v.begin(), v.end(), 6);
+
+        // lower/upper bound in vector
+        // auto it = upper_bound(v.begin(),v.end(),3);
+
+        // Print index
+        // cout << distance(v.begin(), it);
+
+
+        // Set 
+        // set<int> s={2, 5, 7}
+
+        // Accessing first element
+        // auto it1 = s.begin();
         
+        // Accessing third element
+        // auto it2 = next(it1, 2);
+        // cout << *it1 << " " << *it2; - returns 2 and 7
+
+        // auto it=s.find(3); -- find in set    
+        // auto it=s.lower_bound(3) -- lower/upper bound in set
+
+        // s.erase(5); -- erases 5 from set 
+        // s.size(); returns the number of elements in set
+        // s.clear(); removes all the elements from set
+
     }
 }
