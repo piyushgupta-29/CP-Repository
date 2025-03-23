@@ -307,13 +307,6 @@ int main()
     {
         sum=0;cnt=0;ans=0;mx=INT_MIN;mn=1e18;
 
-        // String 
-        // string text = "C++ Programming";
-        // append() or '+' - Used to append a string to another string, e.g str1.append(str2);
-        // substr(starting index of substring, length of substring); 
-        // compare() or '==' - To compare two strings 
-        // int position = text.find("Programming"); // Find the position of a substring, return 4 in this case
-
         // Vector
         // vector<char> v = {'a', 'f', 'd'};
         // Inserting int 'c' at index 1
@@ -334,6 +327,9 @@ int main()
         // Print index
         // cout << distance(v.begin(), it);
 
+        // Comparator function
+        // bool comp(int a, int b) { return a > b; }
+        // sort(v.begin(),v.end(),comp);
 
         // Set 
         // set<int> s={2, 5, 7}
@@ -351,6 +347,44 @@ int main()
         // s.erase(5); -- erases 5 from set 
         // s.size(); returns the number of elements in set
         // s.clear(); removes all the elements from set
+
+
+        // Priority queue
+        // class Compare {  // Custom comparator for priority_queue, set
+        // public:
+        //     bool operator()(pll a, pll b)
+        //     {
+        //         if(a.first > b.first) return true;
+        //         else if(a.first == b.first && a.second < b.second) return true;
+        //         return false;
+        //     }
+        // };
+        // priority_queue<pll, vector<pll>, Compare> pq;
+        // priority_queue<ll, vector<ll>,greater<ll>> pq; // Priority queue with minimum element as highest priority
+        // Operations: empty(), size(), top(), push(), pop(), swap()(to swap the contents of two priority queues provided the queues must be of the same type, although sizes may differ.)
+
+
+        // Queue
+        // queue<ll> q;
+        // Operations: push(), empty(), front(), pop(), back() (Returns the last element of the queue), size()
+
+        // Stack
+        // stack<ll> st;
+        // Operations: push(), empty(), top(), pop()
+
+        // Bit manipulation
+        // (&) - bitwise and of two numbers, suppose (5&3) = 1
+        // (^) - bitwise xor of two numbers, suppose (5^3) = 6
+        // (|) - bitwise or of two numbers, suppose (5|3) = 8
+        // (>>) - Shifts the value to right by the number of bits specified by the right operand, suppose (5>>2) = 1
+        // (<<) - Shifts the value to left by the number of bits specified by the right operand, suppose (2<<3) = 16
+        // (~) - Changes binary digits 1 to 0 and 0 to 1, suppose ~(6) = -7 (here -7 is stored as 2's complement) (0000 0110) -> (1111 1001)
+
+        // Other 
+        // sizeof(var_name) used to retreive size of a variable
+        // &var_name  -- To retreive address of a variable
+        // float(a) -- casts value of a to float, this type casting works with other types as well 
+
 
     }
 }
