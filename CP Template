@@ -33,6 +33,7 @@ ll fact[N + 1];
 //9.Trie
 //10.Segment Tree
 //z array
+
 vector<ll> z_function(string s) {
     ll n = (ll) s.length();
     vector<ll> z(n);
@@ -197,6 +198,53 @@ string dectobin(ll n)
     reverse(s.begin(),s.end());
     return s;
 }
+
+Class Trie 
+{
+    public:
+    vector<Trie* > children;
+    bool eow;
+};
+void insert(Trie* root, string& key) {
+    // Initialize the curr pointer with the root node
+    Trie* curr = root;
+    // Iterate across the length of the string
+    for (char c : key) {
+        // Check if the node exists for the 
+        // current character in the Trie
+        if (curr->children[c - 'a'] == nullptr) {
+            // If node for current character does 
+            // not exist then make a new node
+            Trie* newNode = new Trie();
+            // Keep the reference for the newly
+            // created node
+            curr->children[c - 'a'] = newNode;
+        } 
+        // Move the curr pointer to the
+        // newly created node
+        curr = curr->children[c - 'a'];
+    }
+    // Mark the end of the word
+    curr->isLeaf = true;
+}
+
+bool search(Trie* root, const string& key) {
+    // Initialize the curr pointer with the root node
+    Trie* curr = root;
+    for (char c : key) {
+        // Check if the node exists for the 
+        // current character in the Trie
+        if (curr->children[c - 'a'] == nullptr) 
+            return false;
+        // Move the curr pointer to the 
+        // already existing node for the 
+        // current character
+        curr = curr->children[c - 'a'];
+    }
+    // Return true if the word exists and is marked as ending
+    return curr->isLeaf;
+}
+
 //Segment Tree
 //Segment Tree has a size of 4 times that of normal array i.e(4*n)
 //Segment Tree is a full binary tree
