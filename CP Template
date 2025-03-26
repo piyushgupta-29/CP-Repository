@@ -65,10 +65,6 @@ void getZarr(string str, int Z[])
         }
         else
         {
-                    L i R
-            0 1 2 3 4 5 6 
-            a b c # a b c 
-            0 0 0 0 3 
             // k = i-L so k corresponds to number which
             // matches in [L,R] interval.
             k = i-L;
